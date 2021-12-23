@@ -12,3 +12,5 @@ https://user-images.githubusercontent.com/66616587/147238595-69f23c47-aec0-43f2-
 
 
 ![image](https://user-images.githubusercontent.com/66616587/147237867-ff2cc838-21f5-4f24-bc63-f2b5c5315a42.png)
+
+i know the letters look ugly, but im too lazy to improve them ._.
