@@ -8,7 +8,7 @@ def main():
     while not done:
         what = tools.stringInput("write, put, clear, edit, maze")
         if what == "write":
-            string = tools.stringInput("Alles außer: ß?,:;._´`}][{()/&%$§°><|")
+            string = tools.stringInput("input string")
             kara.writestring(string)
         elif what == "put":
             kara.put()
@@ -237,6 +237,8 @@ class betterkara:
             self.lookdown()
             for index in range(l):
                 symbol = string[index]
+                if not symbol:
+                    continue
                 if symbol == "\\":
                     x = 3
                     y += 10
