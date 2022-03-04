@@ -1,14 +1,14 @@
 false = False
 true = True
-old_kara = kara
+useless = kara
 
 def main():
     kara = betterkara()
     done = false
-    while done != true:
+    while not done:
         what = tools.stringInput("write, put, clear, edit, maze")
         if what == "write":
-            string = tools.stringInput("Input except this Symbols: ß?,:;._´`}][{()/&%$§°><|")
+            string = tools.stringInput("Alles außer: ß?,:;._´`}][{()/&%$§°><|")
             kara.writestring(string)
         elif what == "put":
             kara.put()
@@ -33,17 +33,16 @@ def main():
         else:
             done = true
 
-# noinspection PyTypedDict
 class betterkara:
-    old_k = old_kara
+    old_k = useless
     pickupleafs = 3
     debugactivated = false
 
-    # 1 = remove leafs, 2 = place leafs, 3 = ignore leafs
+    # 1 = remove leafs, 2 = put leafs, 3 = do nothing
     def pickupleaf(self, pickup):
         self.pickupleafs = pickup
 
-    # debug mode activated?
+    # true debug aktiviert, false net
     def debugmode(self, mode):
         self.debugactivated = mode
 
@@ -85,6 +84,7 @@ class betterkara:
         return self.old_k.mushroomFront()
     def getpos(self):
         return self.old_k.getPosition()
+
     treeFront = tree_f
     treeLeft = tree_l
     treeRight = tree_r
@@ -107,7 +107,7 @@ class betterkara:
             self.old_k.move()
             num -= 1
 
-    # self-made function to make sure Kara is looking in a specific direction
+
     def lookdown(self):
         pos = self.old_k.getPosition()
         pos.x += 1
@@ -143,14 +143,26 @@ class betterkara:
                 while not self.old_k.treeLeft():
                     self.turn_l(1)
 
+    def lookup(self):
+        self.lookdown()
+        self.turn_180()
+
+    def lookleft(self):
+        self.lookdown()
+        self.turn_l(1)
+
+    def lookright(self):
+        self.lookdown()
+        self.turn_r(1)
+    
     def move_to(self, to_x, to_y):
         curr = self.old_k.getPosition()
         if curr.x != to_x:
             self.lookdown()
             if curr.x > to_x:
-                    self.turn_r(1)
-                    while self.old_k.getPosition().x != to_x:
-                        self.move(1)
+                self.turn_r(1)
+                while self.old_k.getPosition().x != to_x:
+                    self.move(1)
             else:
                 self.turn_l(1)
                 while self.old_k.getPosition().x != to_x:
@@ -169,15 +181,14 @@ class betterkara:
                 self.turn_180()
 
     setPosition = move_to
-    
-    # dictionaries for symbols to write
     length = {}
     length[" "] = 2
     symbols = {}
     symbols[" "] = []
 
-    # helper function to create symbols easier
     def edit(self):
+        # creates field with specified size, let the user place sth and then read it and make a table for it
+        #self.writestring(" 0123456789 \ 0123456789 \ 0123456789 \ \ \ \~~~~~~~~~~~") ### perfect Debug string
         output = ""
         def checkleaf():
             if self.onleaf():
@@ -216,7 +227,7 @@ class betterkara:
                 cords = self.symbols[symbol][i]
                 self.move_to(cords[0] + margin_x, cords[1] + margin_y)
                 self.putleaf()
-        
+
         self.clear()
         if l == 0:
             world.setSize(2, 2)
@@ -235,8 +246,8 @@ class betterkara:
                     world.setSize(biggest_x, y)
                     continue
                 else:
-                    x = x + self.length[symbol] + 3  # 3 space
-                    if x > 1000:  # Zeilen Umbruch
+                    x = x + self.length[symbol] + 3  # 3 spacing between letters
+                    if x > 1000:  # line break
                         biggest_x = 1000
                         x = 3
                         y += 10
@@ -245,11 +256,9 @@ class betterkara:
                     elif x > biggest_x:
                         biggest_x = x
                     world.setSize(biggest_x, y)
-
                 writesymbol(symbol)
-                margin_x += self.length[symbol] + 3  # 3 space
-
-            self.move_to(0, 0)
+                margin_x += self.length[symbol] + 3   # 3 spacing between letters
+        self.move_to(0, 0)
 
     def clear(self):
         x = world.getSizeX()
@@ -321,7 +330,7 @@ class betterkara:
     symbols["8"] = [[2, 0], [3, 1], [3, 2], [2, 3], [3, 4], [3, 5], [2, 6], [1, 6], [0, 5], [0, 4], [1, 3], [0, 2], [0, 1], [1, 0]]
     symbols["9"] = [[0, 6], [1, 6], [2, 6], [3, 6], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0], [0, 1], [0, 2], [0, 3], [1, 3], [2, 3]]
 
-    # Symbols
+    # more
     symbols["!"] = [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 6]]
     length["!"] = 3
     symbols["+"] = [[1, 2], [1, 3], [2, 3], [0, 3], [1, 4]]
@@ -345,7 +354,7 @@ class betterkara:
     symbols["#"] = [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [4, 2], [4, 4], [2, 2], [2, 4], [0, 2], [0, 4]]
     length["#"] = 5
 
-    # Letters
+    #letters
     length["a"] = 5
     symbols["a"] = [[0, 4], [0, 5], [1, 1], [1, 3], [1, 6], [2, 1], [2, 3], [2, 6], [3, 1], [3, 3], [3, 5], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6]]
     length["b"] = 4
@@ -399,5 +408,4 @@ class betterkara:
     length["z"] = 4
     symbols["z"] = [[0, 3], [0, 6], [1, 3], [1, 5], [1, 6], [2, 3], [2, 4], [2, 6], [3, 3], [3, 6]]
 
-# Execute the main script after the Class Initialized
 main()
