@@ -1,9 +1,17 @@
 Project for Python Kara (https://www.swisseduc.ch/informatik/karatojava/pythonkara/)
 
-Rework of nearly every function to prevent/catch errors and improved them.
+Rework every function to prevent/catch errors and improved them.
 
-Also added new functions to write Sentences or to set Karas view direction.
+Added new functions to enhance the normal kara Class:
+  - islooking* function to check wether kara is facing upwards/downwards/left/right
+  - look* function to force kara to face up/down/left/right
+  - move_to function to make kara move to a specific coordinate
+  - move_num function to make kara move a specififc number of fields
+  - way more usefull stuff, but im to lazy to name here everyone
 
+How to install:
+  1. Download the betterkara.py file and place it in the folder of the pythonkara.jar file
+  2. add the 2 lines found in the example_usage file at the top of your file
 
 
 
