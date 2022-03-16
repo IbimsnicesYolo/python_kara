@@ -11,7 +11,7 @@ Added new functions to enhance the normal kara Class:
 
 How to install:
   1. Download the betterkara.py file and place it in the folder of the pythonkara.jar file
-  2. add the 2 lines found in the example_usage file at the top of your file
+  2. add the 1 lines found in the example_usage file at the top of your file
 
 
 
