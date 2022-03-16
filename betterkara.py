@@ -3,29 +3,30 @@ true = True
 useless = kara
 
 class betterkara:
-# Class Variables
+#
+    # Class Variables
     old_k = useless
     pickupleafs = 3
     debugactivated = false
 
-# 1 = remove leafs, 2 = put leafs, 3 = do nothing
+    # 1 = remove leafs, 2 = put leafs, 3 = do nothing
     def pickupleaf(self, pickup):
         self.pickupleafs = pickup
 
     def getpickupmode(self):
         return self.pickupleafs
 
-# Bool debug activated
+    # Bool debug activated
     def debugmode(self, mode):
         self.debugactivated = mode
 
-# Debug functions
+    # Debug functions
     def debug(self, msg):
         tools.println(str(msg))
         if self.debugactivated:
             tools.showMessage(str(msg))
-
-# overwrite default functions
+# enhancements
+    # overwrite default functions
     def move_num(self, num):
         while num >= 1:
             if self.tree_f():
@@ -59,7 +60,7 @@ class betterkara:
 
     def turn_180(self):
         self.turn_r(2)
-
+#
     def tree_f(self):
         return self.old_k.treeFront()
 
@@ -80,7 +81,7 @@ class betterkara:
     def setpos(self, x, y):
         self.old_k.setPosition(x, y)
 
-# just if someone trys to use the old functions
+    # just if someone trys to use the old functions
     treeFront = tree_f
     treeLeft = tree_l
     treeRight = tree_r
@@ -97,11 +98,8 @@ class betterkara:
         self.turn_r(1)
     def move(self):
         self.move_num(1)
-
-# overwrite setPosition func?
-#    setPosition = move_to
-
-# islooking* funcs are meant to check if kara is facing the specified direction currently
+# look
+    # islooking* funcs are meant to check if kara is facing the specified direction currently
     def islooking(self, dir):
         curr = self.getpos()
         curr.x += 1
@@ -154,7 +152,7 @@ class betterkara:
     def islookingleft(self):
         return self.islooking(3)
 
-# look* funcs are meant to force kara to turn to the given direction
+    # look* funcs are meant to force kara to turn to the given direction
     def lookdown(self):
         while not self.islookingdown():
             self.turn_l(1)
@@ -170,8 +168,8 @@ class betterkara:
     def lookright(self):
         while not self.islookingright():
             self.turn_l(1)
-
-# move func to move to specified coordinates
+# move_to
+    # move func to move to specified coordinates
     def move_to(self, to_x, to_y):
         if to_x > world.getSizeX() - 1 or to_y > world.getSizeY() - 1:
             return
@@ -197,8 +195,7 @@ class betterkara:
                 self.move()
             if turn_back:
                 self.turn_180()
-
-
+#
     length = {}
     length[" "] = 2
     symbols = {}
@@ -230,7 +227,7 @@ class betterkara:
         self.move_to(1, 1)
         self.lookdown()
         self.debug(output)
-
+# writestring
     def writestring(self, string):
         string = string or ""
         l = len(string)
@@ -279,7 +276,7 @@ class betterkara:
                 writesymbol(symbol)
                 margin_x += self.length[symbol] + 3  # 3 spacing between letters
         self.move_to(0, 0)
-
+# clear, put
     def clear(self):
         x = world.getSizeX()
         y = world.getSizeY()
@@ -327,7 +324,7 @@ class betterkara:
         self.pickupleaf(3)
         self.move_to(0, 0)
         self.lookdown()
-
+#
     # Numbers
     length["0"] = 4
     length["1"] = 4
