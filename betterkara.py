@@ -99,7 +99,6 @@ class betterkara:
     def move(self):
         self.move_num(1)
 # look
-    # islooking* funcs are meant to check if kara is facing the specified direction currently
     def islooking(self, dir):
         curr = self.getpos()
         curr.x += 1
@@ -139,7 +138,8 @@ class betterkara:
             world.setMushroom(curr.x, curr.y, true)
 
         return a
-
+# look 2
+    # islooking* funcs are meant to check if kara is facing the specified direction currently
     def islookingup(self):
         return self.islooking(0)
 
